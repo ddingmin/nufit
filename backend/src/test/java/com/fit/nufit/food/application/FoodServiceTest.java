@@ -3,7 +3,7 @@ package com.fit.nufit.food.application;
 import com.fit.nufit.food.domain.*;
 import com.fit.nufit.food.dto.request.FoodCreateRequest;
 import com.fit.nufit.food.dto.request.FoodNutrientCreateRequest;
-import com.fit.nufit.food.dto.response.FoodResponse;
+import com.fit.nufit.food.dto.response.CreatedFoodResponse;
 import com.fit.nufit.food.dto.response.NutrientDetailResponse;
 import com.fit.nufit.food.dto.response.SearchFoodResponse;
 import com.fit.nufit.food.exception.NoSuchFoodException;
@@ -93,7 +93,7 @@ class FoodServiceTest {
         foodRepository.save(pizza);
         foodRepository.save(rice);
         // when
-        List<FoodResponse> foods = foodService.getFoodsByMemberId(member.getId());
+        List<CreatedFoodResponse> foods = foodService.getFoodsByMemberId(member.getId());
 
         // then
         assertThat(foods.size()).isEqualTo(2);
@@ -170,7 +170,7 @@ class FoodServiceTest {
         int pageStart = 0;
 
         // when
-        List<FoodResponse> response = foodService.getFoodsByName("커피", pageStart);
+        List<CreatedFoodResponse> response = foodService.getFoodsByName("커피", pageStart);
 
         // then
         assertThat(response.size()).isEqualTo(6);
@@ -190,7 +190,7 @@ class FoodServiceTest {
         FoodNutrientCreateRequest fat = new FoodNutrientCreateRequest("지방", 5);
         FoodCreateRequest foodCreateRequest = new FoodCreateRequest(member.getId(), "파스타", "오뚜기",
                 1, "g", "brand", 500, List.of(carb, fat));
-        FoodResponse response = foodService.save(foodCreateRequest);
+        CreatedFoodResponse response = foodService.save(foodCreateRequest);
         Long foodId = response.getId();
 
         // when

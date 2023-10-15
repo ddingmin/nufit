@@ -1,15 +1,8 @@
-import React, {useEffect} from 'react';
-import { NavigationContainer } from "@react-navigation/native"; 
 import { createStackNavigator } from "@react-navigation/stack";
-import CaloriesResult from './screens/CaloriesResult';
-import ChooseSearch from './screens/ChooseSearch';
-import NutResult from './screens/NutResult';
-import Search from './screens/Search';
-import SearchDetail from './screens/SearchDetail';
-import SetGoal from './screens/SetGoal';
-import StaticPie from './screens/StaticPie';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import React, { useEffect } from 'react';
+import Navigation from './navigations';
 
 
 const Stack = createStackNavigator();
@@ -44,16 +37,20 @@ export default function App() {
 
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="StaticPie" component={StaticPie} />
-        <Stack.Screen name="ChooseSearch" component={ChooseSearch} />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="SearchDetail" component={SearchDetail} />
-        <Stack.Screen name="SetGoal" component={SetGoal} />
-        <Stack.Screen name="CaloriesResult" component={CaloriesResult} />
-        <Stack.Screen name="NutResult" component={NutResult} />
-      </Stack.Navigator> 
-    </NavigationContainer>
+    <Navigation/>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     {/* <Stack.Screen  options={{headerShown: false,}} name="ChooseSearch" component={ChooseSearch} />
+    //     <Stack.Screen name="Search" component={Search} />
+    //     <Stack.Screen name="SearchDetail" component={SearchDetail} /> */}
+    //     <Stack.Screen options={{headerShown: false,}} name="SetGoal" component={SetGoal} />
+    //     <Stack.Screen options={{headerShown: false,}} name="CaloriesResult" component={CaloriesResult} />
+    //     <Stack.Screen options={{headerShown: false,}} name="NutResult" component={NutResult} />
+    //     <Stack.Screen 
+    //       name="StaticPie" 
+    //       options={{headerShown: false,}}
+    //       component={StaticPie} />
+    //   </Stack.Navigator> 
+    // </NavigationContainer>
   );
 }

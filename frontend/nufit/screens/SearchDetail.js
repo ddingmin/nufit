@@ -6,7 +6,7 @@ const SearchDetail = ({ route }) => {
 
   return (
     <View>
-      <Text style={styles.resultText}>검색결과:{title}</Text>
+      <Text style={styles.resultText}>         {title}</Text>
      
     </View>
   );

@@ -37,6 +37,6 @@ public class FoodNutrientService {
 
         int calorie = (int) Math.round(food.getCalorie());
         List<NutrientResponse> nutrientResponses = foodService.getNutrientResponses(foodId, 1);
-        return new NutrientDetailResponse(food.getName(), calorie, nutrientResponses);
+        return new NutrientDetailResponse(food.getName(), 1, calorie, nutrientResponses);
     }
 }

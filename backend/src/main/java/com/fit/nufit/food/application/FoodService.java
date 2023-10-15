@@ -6,6 +6,7 @@ import com.fit.nufit.food.domain.FoodNutrientRepository;
 import com.fit.nufit.food.domain.FoodRepository;
 import com.fit.nufit.food.dto.request.FoodCreateRequest;
 import com.fit.nufit.food.dto.request.FoodNutrientCreateRequest;
+import com.fit.nufit.food.dto.response.CreatedFoodResponse;
 import com.fit.nufit.food.dto.response.FoodResponse;
 import com.fit.nufit.food.dto.response.NutrientDetailResponse;
 import com.fit.nufit.food.dto.response.SearchFoodResponse;
@@ -42,12 +43,12 @@ public class FoodService {
     private final NutrientRepository nutrientRepository;
 
     @Transactional
-    public FoodResponse save(FoodCreateRequest request) {
+    public CreatedFoodResponse save(FoodCreateRequest request) {
         Food food = foodRepository.save(Food.toEntity(request));
         food.changeWriter(memberRepository.getById(request.getMemberId()));
         List<FoodNutrientCreateRequest> nutrients = request.getNutrients();
         createFoodNutrients(food, nutrients);
-        return new FoodResponse(food);
+        return new CreatedFoodResponse(food);
     }
 
     public void createFoodNutrients(Food food, List<FoodNutrientCreateRequest> nutrients) {
@@ -59,9 +60,10 @@ public class FoodService {
         }
     }
 
-    public FoodResponse findById(Long id) {
-        Food findFood = foodRepository.getById(id);
-        return new FoodResponse(findFood);
+    public FoodResponse getFoodById(Long foodId) {
+        Food food = foodRepository.getById(foodId);
+        List<NutrientResponse> nutrientResponses = getNutrientResponses(foodId, 1);
+        return new FoodResponse(food, nutrientResponses);
     }
 
     public NutrientDetailResponse getNutrientDetailByMealDetailId(Long mealDetailId) {
@@ -72,7 +74,7 @@ public class FoodService {
         int calorieTotal = (int) Math.round(food.getCalorie() * foodCount);
         List<NutrientResponse> nutrientResponses = getNutrientResponses(food.getId(), foodCount);
 
-        return new NutrientDetailResponse(foodName, calorieTotal, nutrientResponses);
+        return new NutrientDetailResponse(foodName, foodCount, calorieTotal, nutrientResponses);
     }
 
     public List<NutrientResponse> getNutrientResponses(Long foodId, int foodCount) {
@@ -112,18 +114,18 @@ public class FoodService {
         }
     }
 
-    public List<FoodResponse> getFoodsByMemberId(Long memberId) {
+    public List<CreatedFoodResponse> getFoodsByMemberId(Long memberId) {
         List<Food> foods = foodRepository.getByMemberId(memberId);
         return foods.stream()
-                .map(FoodResponse::new)
+                .map(CreatedFoodResponse::new)
                 .collect(Collectors.toList());
     }
 
-    public List<FoodResponse> getFoodsByName(String name, int page) {
+    public List<CreatedFoodResponse> getFoodsByName(String name, int page) {
         PageRequest pageRequest = PageRequest.of(page, 10);
         List<Food> foods = foodRepository.getFoodsByName(name, pageRequest);
         return foods.stream()
-                .map(FoodResponse::new)
+                .map(CreatedFoodResponse::new)
                 .collect(Collectors.toList());
     }
 

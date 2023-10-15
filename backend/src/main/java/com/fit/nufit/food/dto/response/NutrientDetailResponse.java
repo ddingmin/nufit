@@ -14,6 +14,7 @@ import java.util.List;
 public class NutrientDetailResponse {
 
     private String foodName;
+    private int foodCount;
     private int calorieTotal;
     private List<NutrientResponse> nutrientResponses;
 

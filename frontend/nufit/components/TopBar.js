@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import poster from '../assets/stats_character.png'
+import left from '../assets/prev_arrow_ico.png'
+import right from '../assets/next_arrow_ico.png'
 
 const TopBar = () => {
   const [date, setDate] = useState(new Date()); // 현재 날짜 상태
@@ -20,35 +23,68 @@ const TopBar = () => {
   };
 
   return (
+    
     <View style={styles.container}>
-      <TouchableOpacity onPress={goToPreviousDay}>
-        <Text style={styles.button}>&lt;</Text>
-      </TouchableOpacity>
-      <Text style={styles.date}>{currentDate}</Text>
-      <TouchableOpacity onPress={goToNextDay}>
-        <Text style={styles.button}>&gt;</Text>
-      </TouchableOpacity>
+      <View>
+        <Image style={styles.img} source={poster}/>
+      </View>
+      <View style={styles.headerbox}>
+        <Text style={styles.text}>당신의 섭취 기록 및 통계</Text>
+        <View style={styles.datebox}>
+          <TouchableOpacity onPress={goToPreviousDay}>
+            <Image style={styles.button} source={left}/>
+          </TouchableOpacity>
+          <Text style={styles.date}>{currentDate}</Text>
+          <TouchableOpacity onPress={goToNextDay}>
+          <Image style={styles.button} source={right}/>
+          </TouchableOpacity>
+        </View>
+        
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
+    
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    paddingVertical: 0,
     backgroundColor: '#f2f2f2',
+    paddingTop: 70,
+    
   },
   button: {
     fontSize: 20,
-    paddingHorizontal: 70,
+    
+  },
+  headerbox: {
+    marginTop: 10,
+    flexDirection: 'row',
+    
+    
+  },
+  datebox: {
+    flexDirection: 'row',
+    paddingHorizontal: 0,
+    alignItems: 'center',
   },
   date: {
-    fontSize: 18,
+    // fontSize: 13,
     fontWeight: 'bold',
     paddingHorizontal: 15,
   },
+  text: {
+    // fontFamily: 'Pretendard-Bold',
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingRight: 25,
+  },
+  img: {
+    width: 40,
+    height: 40,
+  }
 });
 
 export default TopBar;

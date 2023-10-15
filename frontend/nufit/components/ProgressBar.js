@@ -23,28 +23,32 @@ const ProgressBar = ({ label, goal, progress }) => {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
+    alignItems: 'center',
   },
   label: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 12,
     marginBottom: 5,
+    color: '#fff',
   },
   progressBar: {
     width: 80,
-    height: 8,
+    height: 5,
     flexDirection: 'row',
   },
   fill: {
-    backgroundColor: '#ff0000',
+    backgroundColor: '#fff',
     height: '100%',
+    borderRadius: 10,
   },
   remaining: {
-    backgroundColor: '#dddddd',
+    backgroundColor: '#17AE9C',
     height: '100%',
+    borderRadius: 10,
   },
   progressText: {
     marginTop: 5,
     fontSize: 12,
+    color: '#fff',
   },
 });
 

@@ -47,6 +47,7 @@ const FirstRoute = ({ res }) => {
 
 const SecondRoute = () => (
   <View style={[styles.container, { backgroundColor: '#ffffff' }]}>
+    <Image style={styles.img} source={char} />
     <Text style={styles.text}>음식을 등록해보세요</Text>
   </View>
 );

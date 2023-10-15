@@ -2,30 +2,34 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { VictoryPie } from 'victory-native';
 
-const ProgressCircle = () => {
-  const goal = 2000; // 목표 섭취량
-  const progress = 1000; // 현재까지 섭취한 칼로리
+const ProgressCircle = ({ progress, carbspercent, proteinpercent, fatpercent }) => {
 
-  const progressPercentage = (progress / goal) * 100;
+ 
+
+
   const data = [
-    { x: 'Progress', y: progressPercentage },
-    { x: 'Remaining', y: 100 - progressPercentage },
+    { x: 'Carbs', y: carbspercent },
+    { x: 'Protein', y: proteinpercent },
+    { x: 'Fat', y: fatpercent },
   ];
+
+  
 
   return (
     <View style={styles.container}>
       <VictoryPie
         data={data}
-        colorScale={['#ff0000', '#dddddd']}
-        innerRadius={90}
+        colorScale={['#fff', '#D5F12B', '#000000']}
+        innerRadius={95}
         labels={() => null}
         width={300} height={300}
         style={styles.progressCircle}
+        
       />
       <Text style={styles.progressText}>
-        <Text style={styles.caloriesText}>{`${progress}kcal`}</Text>
+        <Text style={styles.subtitleText}>총 섭취.</Text>
         {'\n'}
-        <Text style={styles.subtitleText}>먹었어요</Text>
+        <Text style={styles.caloriesText}>{`${progress}kcal`}</Text>
       </Text>
       
     </View>
@@ -49,10 +53,13 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   caloriesText: {
-    fontSize: 20,
+    fontSize: 22,
+    color: '#fff',
   },
   subtitleText: {
     fontSize: 15,
+    color: '#fff',
+    
   },
   
 });

@@ -4,7 +4,7 @@ import com.fit.nufit.food.domain.FoodNutrientRepository;
 import com.fit.nufit.food.dto.request.FoodCreateRequest;
 import com.fit.nufit.food.dto.request.FoodNutrientCreateRequest;
 import com.fit.nufit.food.dto.request.FoodNutrientUpdateRequest;
-import com.fit.nufit.food.dto.response.FoodResponse;
+import com.fit.nufit.food.dto.response.CreatedFoodResponse;
 import com.fit.nufit.member.domain.Member;
 import com.fit.nufit.member.domain.MemberRepository;
 import com.fit.nufit.member.domain.Role;
@@ -59,8 +59,8 @@ class FoodNutrientServiceTest {
         FoodNutrientCreateRequest fat = new FoodNutrientCreateRequest("지방", 5);
         FoodCreateRequest foodCreateRequest = new FoodCreateRequest(member.getId(), "파스타", "오뚜기",
                 1, "g", "brand", 500, List.of(carb, fat));
-        FoodResponse foodResponse = foodService.save(foodCreateRequest);
-        Long foodId = foodResponse.getId();
+        CreatedFoodResponse createdFoodResponse = foodService.save(foodCreateRequest);
+        Long foodId = createdFoodResponse.getId();
         FoodNutrientCreateRequest protein = new FoodNutrientCreateRequest("단백질", 5);
         FoodNutrientUpdateRequest request = new FoodNutrientUpdateRequest(foodId, List.of(protein));
         // when
